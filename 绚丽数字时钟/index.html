@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>绚丽时钟</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="js/digit.js"></script>
+    <script src="js/events.js"></script>
+    <script src="js/index.js"></script>
+</head>
+
+<body>
+    <div id="main_content">
+        <div class="models">
+            <h3 class="title">定时器</h3>
+            <div class="setTime">
+                <input type="text" name="timing_hours" id="timing_hours" maxlength="2"><span>时</span>
+                <br>
+                <input type="text" name="timing_minutes" id="timing_minutes" maxlength="2"><span>分</span>
+                <br>
+                <input type="text" name="timing_seconds" id="timing_seconds" maxlength="2"><span>秒</span>
+                <br>
+            </div>
+            <div class="timingInfo">
+                <p>
+                    <label>当前状态:</label><span id="TimingStatus">未启动</span>
+                </p>
+                <p>
+                    <label>剩余时间:</label><span id="Endtime">00:00:00</span>
+                </p>
+            </div>
+            <div class="">
+                <button id="startbtn">开始计时</button>
+                <button id="Timingstop">提前结束</button>
+                <button id="SeeTiming">查看</button>
+            </div>
+        </div>
+        <div class="models">
+            <button id="displayNowTime">显示当前时间</button>
+        </div>
+    </div>
+    <canvas id="Timecanvas">
+        当前浏览器不支持canvas，请更换浏览器
+    </canvas>
+</body>
+
+</html>
