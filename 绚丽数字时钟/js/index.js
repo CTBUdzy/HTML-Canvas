@@ -13,13 +13,9 @@ var interface = "setup";
 const colors = ["#33bb5e5", "#099cc", "#aa66cc", "#9933cc", "#99cc00", "#669900", "#ffbb33", "#ff8800", "ff4444", "#cc00cc"]; //爆炸小球的颜色
 window.onload = function () {
 
+    geyData();
 
-    WINDOW_WIDTH = document.body.clientWidth;
-    WINDOW_HEIGHT = document.body.clientHeight - 5;
 
-    MARGIN_LEFT = Math.round(WINDOW_WIDTH / 10);
-    MARGIN_TOP = Math.round(WINDOW_HEIGHT / 5);
-    RADIUS = Math.round(WINDOW_WIDTH * 4 / 5 / 108) - 1;
 
     if (WINDOW_WIDTH < 600) {
         var models = document.getElementsByClassName('models');
@@ -42,6 +38,9 @@ window.onload = function () {
 
         curShowTimeSeconds = getcurShowTimeSeconds(); //刷新时间
         setInterval(function () {
+            geyData();
+            cav.width = WINDOW_WIDTH;
+            cav.height = WINDOW_HEIGHT;
             render(cxt); //绘制时间小球
             update(); //更新时间
         }, 50);
@@ -67,6 +66,16 @@ function switchTimeSetup(witch) {
     while (balls.length) {
         balls.pop(); //删除掉画布外的小球
     }
+}
+
+//设置各个参数的值
+function geyData() {
+    WINDOW_WIDTH = document.body.clientWidth;
+    WINDOW_HEIGHT = document.body.clientHeight - 5;
+
+    MARGIN_LEFT = Math.round(WINDOW_WIDTH / 10);
+    MARGIN_TOP = Math.round(WINDOW_HEIGHT / 5);
+    RADIUS = Math.round(WINDOW_WIDTH * 4 / 5 / 108) - 1;
 }
 
 //设置参数值
