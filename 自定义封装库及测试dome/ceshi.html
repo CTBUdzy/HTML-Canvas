@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>测试封装库</title>
+	<script src="tools1.js"></script>
+	<script src="Graphical.js"></script>
+	<style>
+		canvas{
+			border: 1px solid #000;
+		}
+		hr{
+			margin-top: 20px;
+		}
+	</style>
+</head>
+
+<body>
+	<h2>鼠标追踪</h2>
+	<canvas id="test1"></canvas>
+	<p id="textview"></p>
+	<hr>
+	<h2>键盘控制方向</h2>
+	<canvas id="test2"></canvas>
+	<hr>
+	<h2>绘制小球类</h2>
+	<canvas id="test3"></canvas>
+</body>
+	<script>
+		function $$(id){
+			return document.getElementById(id);
+		}
+		window.onload = function(){
+			{
+			//鼠标追踪
+			var cnv = $$("test1");
+			var textview = $$("textview");
+			var cxt = cnv.getContext("2d");
+			var mouse = tools.getMouse(cnv);
+			cnv.addEventListener("mousemove",function(){
+				textview.innerHTML = "x:" + mouse.x + ";y:" + mouse.y;
+			});
+			}
+			
+			{
+			//键盘事件
+			var cnv = $$("test2");
+			var cxt = cnv.getContext("2d");
+				var x = 50;
+				var y = 50;
+				var ball1 = new Ball(x,y,20);
+				ball1.fill(cxt);
+			function drowball(x,y){
+				cxt.beginPath();
+				cxt.arc(x,y,20,0,360*Math.PI/180,true);
+				cxt.closePath();
+				cxt.fillStyle = "#6699FF";
+				cxt.fill();
+			}
+				
+				var key = tools.getKey();
+				window.addEventListener('keydown',function(){
+					cxt.clearRect(0,0,cnv.width,cnv.height);
+					switch(key.direction){
+						case "up":
+							ball1.y -= 1;
+							break;
+						case "down":
+							ball1.y += 1;
+							break;
+						case "right":
+							ball1.x += 1;
+							break;
+						case "left":
+							ball1.x -= 1;
+							break;
+						default:
+							break;
+					}
+					ball1.fill(cxt);
+					//drowball(x,y);
+				});
+			}
+			
+			
+			{
+				//小球旋转
+				var cnv = $$("test3");
+				var cxt = cnv.getContext("2d");
+				var x = 50;
+				var y = 50;
+				var ball1 = new Ball(x,y,20);
+				var centerx = cnv.width/2;
+				var centery = cnv.height/2;
+				var radius = 50;
+				var angle = 0;
+				(function frame(){
+					window.requestAnimationFrame(frame);
+					cxt.clearRect(0,0,cnv.width,cnv.height);
+					cxt.beginPath();
+					cxt.arc(centerx,centery,radius,0,360*Math.PI/180,true);
+					cxt.closePath();
+					cxt.stroke();
+					ball1.x = centerx + Math.cos(angle) * radius;
+					ball1.y = centery + Math.sin(angle) * radius;
+					ball1.fill(cxt);
+					angle += 0.05;
+				})();;
+				
+			}
+		}
+	</script>
+</html>
+
+	
