@@ -24,8 +24,11 @@
 	<h2>键盘控制方向</h2>
 	<canvas id="test2"></canvas>
 	<hr>
-	<h2>绘制小球类</h2>
+	<h2>旋转的小球</h2>
 	<canvas id="test3"></canvas>
+	<hr>
+	<h2>箭头追踪鼠标</h2>
+	<canvas id="test4"></canvas>
 </body>
 	<script>
 		function $$(id){
@@ -106,9 +109,28 @@
 					ball1.y = centery + Math.sin(angle) * radius;
 					ball1.fill(cxt);
 					angle += 0.05;
-				})();;
+				})();
 				
 			}
+			{
+				//箭头旋转
+				var cnv4 = $$("test4");
+				var cxt4 = cnv4.getContext("2d");
+				var arrow = new Arrow(cnv4.width/2,cnv4.height/2);
+				var mouse = tools.getMouse(cnv4);
+				(function frame(){
+					window.requestAnimationFrame(frame);
+					cxt4.clearRect(0,0,cnv4.width,cnv4.height);
+					cxt4.beginPath();
+					
+					var dx = mouse.x - cnv4.width/2;
+					var dy = mouse.y - cnv4.height/2;
+					arrow.angle = Math.atan2(dy,dx);
+					arrow.fill(cxt4);
+				})();
+				
+			}
+			
 		}
 	</script>
 </html>
