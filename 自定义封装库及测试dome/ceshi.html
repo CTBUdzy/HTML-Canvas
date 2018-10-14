@@ -29,6 +29,10 @@
 	<hr>
 	<h2>箭头追踪鼠标</h2>
 	<canvas id="test4"></canvas>
+	<hr>
+	<h2>外接矩形判定法（碰撞检测）</h2>
+	<canvas id="test5"></canvas>
+	<p id="textview5"></p>
 </body>
 	<script>
 		function $$(id){
@@ -36,13 +40,43 @@
 		}
 		window.onload = function(){
 			{
+				var cnv5 = $$('test5');
+				var textview5 = $$("textview5");
+				var cxt5 = cnv5.getContext("2d");
+				var ballA_5 = new Ball(cnv5.width/2,cnv5.height/2,20);
+				
+				ballA_5.fill(cxt5);
+				var rectA_5 = ballA_5.getRect();
+				
+				var mouse5 = tools.getMouse(cnv5);
+				(function frame5(){
+					window.requestAnimationFrame(frame5);
+					cxt5.clearRect(0,0,cnv5.width,cnv5.height);
+					var ballB_5 = new Ball(mouse5.x,mouse5.y,20);
+					ballB_5.fill(cxt5);
+					ballA_5.fill(cxt5);
+					cxt5.strokeRect(rectA_5.x,rectA_5.y,rectA_5.width,rectA_5.height);
+					var rectB_5 = ballB_5.getRect();
+					cxt5.strokeRect(rectB_5.x,rectB_5.y,rectB_5.width,rectB_5.height);
+					//检测碰撞
+					if(tools.checkRect(rectA_5,rectB_5)){
+						textview5.innerHTML = "撞上了";
+						console.log(2);
+					}else{
+						textview5.innerHTML = "未撞上";
+					}
+				})();
+			}
+			
+			
+			{
 			//鼠标追踪
 			var cnv = $$("test1");
 			var textview = $$("textview");
 			var cxt = cnv.getContext("2d");
-			var mouse = tools.getMouse(cnv);
+			var mouse1 = tools.getMouse(cnv);
 			cnv.addEventListener("mousemove",function(){
-				textview.innerHTML = "x:" + mouse.x + ";y:" + mouse.y;
+				textview.innerHTML = "x:" + mouse1.x + ";y:" + mouse1.y;
 			});
 			}
 			
@@ -50,17 +84,17 @@
 			//键盘事件
 			var cnv = $$("test2");
 			var cxt = cnv.getContext("2d");
-				var x = 50;
+				var x = 100;
 				var y = 50;
 				var ball1 = new Ball(x,y,20);
 				ball1.fill(cxt);
-			function drowball(x,y){
-				cxt.beginPath();
-				cxt.arc(x,y,20,0,360*Math.PI/180,true);
-				cxt.closePath();
-				cxt.fillStyle = "#6699FF";
-				cxt.fill();
-			}
+//			function drowball(x,y){
+//				cxt.beginPath();
+//				cxt.arc(x,y,20,0,360*Math.PI/180,true);
+//				cxt.closePath();
+//				cxt.fillStyle = "#6699FF";
+//				cxt.fill();
+//			}
 				
 				var key = tools.getKey();
 				window.addEventListener('keydown',function(){
@@ -93,21 +127,21 @@
 				var cxt = cnv.getContext("2d");
 				var x = 50;
 				var y = 50;
-				var ball1 = new Ball(x,y,20);
+				var ball3 = new Ball(x,y,20);
 				var centerx = cnv.width/2;
 				var centery = cnv.height/2;
 				var radius = 50;
 				var angle = 0;
-				(function frame(){
-					window.requestAnimationFrame(frame);
+				(function frame3(){
+					window.requestAnimationFrame(frame3);
 					cxt.clearRect(0,0,cnv.width,cnv.height);
 					cxt.beginPath();
 					cxt.arc(centerx,centery,radius,0,360*Math.PI/180,true);
 					cxt.closePath();
 					cxt.stroke();
-					ball1.x = centerx + Math.cos(angle) * radius;
-					ball1.y = centery + Math.sin(angle) * radius;
-					ball1.fill(cxt);
+					ball3.x = centerx + Math.cos(angle) * radius;
+					ball3.y = centery + Math.sin(angle) * radius;
+					ball3.fill(cxt);
 					angle += 0.05;
 				})();
 				
@@ -118,8 +152,8 @@
 				var cxt4 = cnv4.getContext("2d");
 				var arrow = new Arrow(cnv4.width/2,cnv4.height/2);
 				var mouse = tools.getMouse(cnv4);
-				(function frame(){
-					window.requestAnimationFrame(frame);
+				(function frame4(){
+					window.requestAnimationFrame(frame4);
 					cxt4.clearRect(0,0,cnv4.width,cnv4.height);
 					cxt4.beginPath();
 					

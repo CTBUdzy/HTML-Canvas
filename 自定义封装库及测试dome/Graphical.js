@@ -4,7 +4,7 @@
 */
 function Ball(x,y,radius,color){
 	this.x = x || 0;
-	this.y = x || 0;
+	this.y = y || 0;
 	this.radius = radius || 15;
 	this.color = color || "red";
 	this.scaleX = 1;
@@ -33,6 +33,16 @@ Ball.prototype = {
 		cxt.closePath();
 		cxt.fill();
 		cxt.restore();
+	},
+	////返回外接矩形的左上角坐标和宽高
+	getRect:function(){
+		var rect = {
+			x:this.x-this.radius,
+			y:this.y-this.radius,
+			width:2*this.radius,
+			height:2*this.radius
+		};
+		return rect;
 	}
 }
 

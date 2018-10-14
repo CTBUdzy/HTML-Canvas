@@ -8,9 +8,6 @@ window.tools = {};
 *传参：被监测的canvas对象
 *时间：2018-10-8
 */
-
-
-//获取鼠标位置
 window.tools.getMouse = function(element){
 	//定义一个Mouse对象
 	var mouse = {
@@ -69,6 +66,33 @@ window.tools.getKey = function(){
 		}
 	});
 	return key;
+}
+
+/*功能：动画循环，兼容各大浏览器
+* 参数：无
+* 时间：2018-10-14
+*/
+window.requestAnimationFrame = (
+    window.webkitRequestAnimationFrame ||
+    window.mozRequestAnimationFrame ||
+    window.msRequestAnimationFrame ||
+    window.oRequestAnimationFrame ||
+    function (callback) {
+        return window.setTimeout(callback, 1000 / 60);
+    }
+);
+
+
+/*
+*作用：检测外接矩形碰撞
+*传参：两个被检测的对象
+*时间：2018-10-14
+*/
+window.tools.checkRect = function(rectA, rectB){
+	return !(rectA.x + rectA.width < rectB.x ||
+             rectB.x + rectB.width < rectA.x ||
+             rectA.y + rectA.height < rectB.y ||
+             rectB.y + rectB.height < rectA.y);
 }
 
 
