@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="UTF-8">
+<title>两周年抽奖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<link rel="stylesheet" type="text/css" href="css/main.css">
+<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="js/main.js">
+</script>
+</head>
+<body>
+<div class="header">
+	<h1>庆祝黄晓颖和邓占勇<br/>两周年庆专属抽奖</h1>
+</div>
+<div class="turnplate_box">
+	<canvas id="myCanvas" width="300px" height="300px">抱歉！浏览器不支持。</canvas>
+	<canvas id="myCanvas01" width="200px" height="200px">抱歉！浏览器不支持。</canvas>
+	<canvas id="myCanvas03" width="200px" height="200px">抱歉！浏览器不支持。</canvas>
+	<canvas id="myCanvas02" width="150px" height="150px">抱歉！浏览器不支持。</canvas>
+	<button id="tupBtn" class="turnplatw_btn"></button>
+</div>
+<div class="info">
+	<h4>你获得的奖品如下：</h4>
+	<div id="what"><p style="display:none;"></p></div>
+</div>
+<!-- 更改系统默认弹窗 -->
+<script type="text/javascript">
+window.alert = function(str)
+{
+	var shield = document.createElement("DIV");
+	shield.id = "shield";
+	shield.style.position = "absolute";
+	shield.style.left = "50%";
+	shield.style.top = "50%";
+	shield.style.width = "280px";
+	shield.style.height = "150px";
+	shield.style.marginLeft = "-140px";
+	shield.style.marginTop = "-110px";
+	shield.style.zIndex = "25";
+	var alertFram = document.createElement("DIV");
+	alertFram.id="alertFram";
+	alertFram.style.position = "absolute";
+	alertFram.style.width = "280px";
+	alertFram.style.height = "150px";
+	alertFram.style.left = "50%";
+	alertFram.style.top = "50%";
+	alertFram.style.marginLeft = "-140px";
+	alertFram.style.marginTop = "-110px";
+	alertFram.style.textAlign = "center";
+	alertFram.style.lineHeight = "150px";
+	alertFram.style.zIndex = "300";
+	strHtml = "<ul style=\"list-style:none;margin:0px;padding:0px;width:100%\">\n";
+	strHtml += " <li style=\"background:rgb(51,122,183);text-align:left;padding-left:20px;font-size:16px;font-weight:bold;height:30px;line-height:30px;border:1px solid #F9CADE;color:white\">[中奖提醒]</li>\n";
+	strHtml += " <li style=\"background:rgb(227,236,172);text-align:center;font-size:26px;height:95px;line-height:95px;border-left:1px solid #F9CADE;border-right:1px solid #F9CADE;color:rgb(255,66,93)\">"+str+"</li>\n";
+	strHtml += " <li style=\"background:rgb(51,122,183);text-align:center;font-weight:bold;height:40px;line-height:35px; border:1px solid #F9CADE;\"><input type=\"button\" value=\"去找邓占勇兑奖\" onclick=\"doOk()\" style=\"height:30px;background:rgb(92,184,92);color:white;border:1px solid white;font-size:16px;line-height:20px;outline:none;padding:3px 1em;margin-top: 4px;border-radius:10px;\"/></li>\n";
+	strHtml += "</ul>\n";
+	alertFram.innerHTML = strHtml;
+	document.body.appendChild(alertFram);
+	document.body.appendChild(shield);
+	this.doOk = function(){
+		alertFram.style.display = "none";
+		shield.style.display = "none";
+		if(str != '亲，抽奖次数已用光！'){
+			$("#what p").text(str);
+			$("#what p").show();
+		}
+	}
+	alertFram.focus();
+	document.body.onselectstart = function(){return false;};
+}
+</script>
+
+
+</body>
+</html>
